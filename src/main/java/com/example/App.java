@@ -2,6 +2,9 @@ package com.example;
 
 import java.io.File;
 
+import com.example.Vue.PerspectiveView;
+import com.example.Vue.ThumbnailView;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;

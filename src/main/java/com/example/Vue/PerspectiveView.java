@@ -1,6 +1,10 @@
-package com.example;
+package com.example.Vue;
 
 import java.io.File;
+
+import com.example.Controleur.ImageController;
+import com.example.Modele.ImageModel;
+import com.example.Modele.Perspective;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

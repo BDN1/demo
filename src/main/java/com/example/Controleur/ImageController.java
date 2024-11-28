@@ -1,4 +1,7 @@
-package com.example;
+package com.example.Controleur;
+
+import com.example.Modele.ImageModel;
+import com.example.Modele.Perspective;
 
 import javafx.scene.image.ImageView;
 

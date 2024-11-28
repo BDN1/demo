@@ -1,6 +1,9 @@
-package com.example;
+package com.example.Vue;
 
 import java.io.File;
+
+import com.example.Controleur.ImageController;
+import com.example.Modele.ImageModel;
 
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;

@@ -1,14 +1,14 @@
-package com.example;
+package com.example.Command;
+
 import java.util.Stack;
 
-public class CommandHistory  {
+public class CommandHistory {
 
     private Stack<ICommand> commandStack = new Stack<>();
 
-
     public void executeCommand(ICommand command) {
         command.execute();
-        commandStack.push(command); 
+        commandStack.push(command);
     }
 
     public void undoLastCommand() {
@@ -16,11 +16,8 @@ public class CommandHistory  {
             ICommand command = commandStack.pop();
             command.undo();
 
-
-            
         } else {
             System.out.println("pas de command a undo");
         }
     }
-
 }

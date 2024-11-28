@@ -1,4 +1,6 @@
-package com.example;
+package com.example.Command;
+
+import com.example.Modele.Perspective;
 
 //Commande de zoom
 
@@ -9,7 +11,11 @@ public class ZoomCommand implements ICommand {
         this.perspective = perspective;
     }
 
-    public void execute(){
+    public void execute() {
         this.perspective.zoom();
+    }
+    
+    public void undo() {
+        
     }
 }
