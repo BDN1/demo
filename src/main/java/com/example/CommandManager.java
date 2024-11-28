@@ -5,9 +5,11 @@ public class CommandManager {
     
 
     private static CommandManager instance;
+    private ICommand undoLast;
+    private CommandHistory commandHistory;
 
     private  CommandManager(){
-        
+        commandHistory = new CommandHistory();
     }
 
 
@@ -16,6 +18,16 @@ public class CommandManager {
             instance = new CommandManager();
         }
         return instance;
+    }
+
+
+    public void setUndoLast(ICommand command) {
+        undoLast = command;
+    }
+
+
+    public ICommand getLastUndoneCommand() {
+        return undoLast;
     }
 
 
