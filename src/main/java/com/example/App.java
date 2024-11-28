@@ -43,18 +43,29 @@ public class App extends Application {
         stage.show();
     }
     private MenuBar createMenuBar(PerspectiveView perspectiveView, PerspectiveView perspectiveView2, ThumbnailView thumbnailView){
-        Menu fileMenu = new Menu("File");
+        Menu fileMenu = new Menu("Fichier");
+        Menu edition = new Menu("Édition");
 
         // Create the "Upload" menu item
-        MenuItem uploadItem = new MenuItem("Upload Image");
+        MenuItem uploadItem = new MenuItem("Charger image");
         uploadItem.setOnAction(e -> handleUploadImage(perspectiveView, perspectiveView2, thumbnailView));
+
+        MenuItem undo = new MenuItem("Défaire");
+        //undo.setOnAction(e -> undo());
+        MenuItem redo = new MenuItem("Refaire");
+        //redo.setOnAction(e -> redo());
+
+
 
         // Add the "Upload" item to the "File" menu
         fileMenu.getItems().add(uploadItem);
+        edition.getItems().add(undo);
+        edition.getItems().add(redo);
 
         // Create the menu bar and add the "File" menu
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().add(fileMenu);
+        menuBar.getMenus().add(edition);
 
         return menuBar;
     }

@@ -17,7 +17,7 @@ public class ThumbnailView extends ImageView implements Observer {
     public ThumbnailView() {
         image = new ImageModel();
         imageView = new ImageView();
-        imageView.setFitHeight(400);
+        imageView.setFitHeight(470);
         imageView.setFitWidth(470);
         imageView.setPreserveRatio(true);
 
