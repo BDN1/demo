@@ -16,7 +16,7 @@ public class CommandHistory  {
             ICommand command = commandStack.pop();
             command.undo();
         } else {
-            System.out.println("No commands to undo.");
+            System.out.println("pas de command a undo");
         }
     }
 
