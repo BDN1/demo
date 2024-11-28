@@ -15,9 +15,9 @@ public class App extends Application {
         PerspectiveView perspectiveView = new PerspectiveView();
         PerspectiveView perspectiveView2 = new PerspectiveView();
         ThumbnailView thumbnailView = new ThumbnailView();
-
+        
         HBox root = new HBox(20,thumbnailView.getView(),perspectiveView.getView(), perspectiveView2.getView()); 
-
+        
 
         root.setStyle("-fx-alignment: center;");
 
