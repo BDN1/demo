@@ -1,12 +1,25 @@
 package com.example;
 
-import java.io.IOException;
-import javafx.fxml.FXML;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class SecondaryController {
-
-    @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
+/**
+ 
+JavaFX App*/
+public class App extends Application {
+    public static void main(String[] args) {
+        launch();
     }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        Perspective perspective = new Perspective();
+        PerspectiveView perspectiveView = new PerspectiveView();
+        ImageController imageController = new ImageController(perspective,perspectiveView);
+
+        stage.setTitle("Test");
+        stage.setScene(perspectiveView.getScene());
+        stage.show();
+    }
+
 }
