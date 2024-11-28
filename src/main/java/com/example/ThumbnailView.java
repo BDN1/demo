@@ -1,5 +1,8 @@
 package com.example;
 
+import java.io.File;
+
+import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
@@ -11,18 +14,17 @@ public class ThumbnailView extends ImageView implements Observer {
     public ThumbnailView() {
         image = new ImageModel();
         imageView = new ImageView();
-        imageView.setFitHeight(300);
-        imageView.setFitWidth(400);
+        imageView.setFitHeight(400);
+        imageView.setFitWidth(470);
         imageView.setPreserveRatio(true);
 
         controller = new ImageController(image, imageView);
-
-        this.setStyle("-fx-border-color: red; -fx-border-width: 2;");
     }
     public HBox getView() {
 
         HBox hb = new HBox(10, imageView);
-        hb.setStyle("-fx-border-color: red; -fx-border-width: 2;");
+        hb.setStyle("-fx-border-color: black; -fx-border-width: 5;");
+        hb.setAlignment(Pos.CENTER);
         return hb;
     }
 
@@ -30,5 +32,13 @@ public class ThumbnailView extends ImageView implements Observer {
     public void update() {
         imageView.setFitWidth(image.getImage().getWidth());
         imageView.setFitHeight(image.getImage().getHeight());
+    }
+    public void loadImage(File file) {
+        image.loadImage(file);
+        if (image.getImage() != null) {
+            imageView.setImage(image.getImage());  // Set the ImageView to display the loaded image
+        } else {
+            System.err.println("Image not loaded correctly.");
+        }
     }
 }

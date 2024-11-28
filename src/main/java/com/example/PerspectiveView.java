@@ -1,9 +1,12 @@
 package com.example;
 
+import java.io.File;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class PerspectiveView extends ImageView implements Observer {
     private ImageView imageView;
@@ -15,28 +18,27 @@ public class PerspectiveView extends ImageView implements Observer {
     private Button zoomOut;
     private Button translateLeft;
     private Button translateRight;
+    private Button translateUp;
+    private Button translateDown;
 
     public PerspectiveView() {
         image = new ImageModel();
         imageView = new ImageView();
-        imageView.setFitHeight(300);
-        imageView.setFitWidth(400);
-        imageView.setPreserveRatio(true);
+        imageView.setFitHeight(930);
+        imageView.setFitWidth(700);
+        imageView.setPreserveRatio(false);
 
         translateLeft = new Button("<-");
+        translateUp = new Button("^");
         zoomIn = new Button("Zoom In");
         zoomOut = new Button("Zoom Out");
         translateRight = new Button("->");
-
-        HBox hb = new HBox(10, imageView, translateLeft, zoomIn, zoomOut, translateRight);
-        hb.setAlignment(Pos.BOTTOM_CENTER);
+        translateDown = new Button("v");
 
         perspective = new Perspective();
         controller = new ImageController(perspective, imageView);
 
         setButtonActions();
-
-        hb.setStyle("-fx-border-color: black; -fx-border-width: 2;");
     }
 
     private void setButtonActions() {
@@ -44,13 +46,19 @@ public class PerspectiveView extends ImageView implements Observer {
         zoomOut.setOnAction(e -> controller.handleZoomOut());
         translateLeft.setOnAction(e -> controller.handleTranslateLeft());
         translateRight.setOnAction(e -> controller.handleTranslateRight());
+        translateUp.setOnAction(e -> controller.handleTranslateUp());
+        translateDown.setOnAction(e -> controller.handleTranslateDown());
     }
+    public VBox getView() {
+        HBox hb = new HBox(10, imageView);
+        hb.setAlignment(Pos.CENTER);
 
-    public HBox getView() {
+        HBox button = new HBox(10,translateLeft, translateUp, zoomIn, zoomOut, translateRight,translateDown);
+        hb.setAlignment(Pos.BASELINE_LEFT);
 
-        HBox hb = new HBox(10, imageView, translateLeft, zoomIn, zoomOut, translateRight);
-        hb.setStyle("-fx-border-color: black; -fx-border-width: 2;");
-        return hb;
+        VBox vb = new VBox(10,hb,button);
+        vb.setStyle("-fx-border-color: blue; -fx-border-width: 5;");
+        return vb;
     }
 
     @Override
@@ -59,5 +67,13 @@ public class PerspectiveView extends ImageView implements Observer {
         imageView.setFitHeight(image.getImage().getHeight() * perspective.getScale());
 
         imageView.setTranslateX(perspective.getX());
+    }
+    public void loadImage(File file) {
+        image.loadImage(file);
+        if (image.getImage() != null) {
+            imageView.setImage(image.getImage());  // Set the ImageView to display the loaded image
+        } else {
+            System.err.println("Image not loaded correctly.");
+        }
     }
 }

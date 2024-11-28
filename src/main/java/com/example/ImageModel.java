@@ -1,5 +1,7 @@
 package com.example;
 
+import java.io.File;
+
 import javafx.scene.image.Image;
 
 public class ImageModel {
@@ -11,5 +13,18 @@ public class ImageModel {
     }
     public Image getImage(){
         return this.image;
+    }
+    public void loadImage(File file) {
+        if (file.exists() && file.isFile()) {
+            try {
+                this.image = new Image(file.toURI().toString());
+                System.out.println("Image loaded successfully: " + file.getName());
+                System.out.println(file.getAbsolutePath());
+            } catch (Exception e) {
+                System.err.println("Error loading image: " + e.getMessage());
+            }
+        } else {
+            System.err.println("File not found or invalid: " + file.getAbsolutePath());
+        }
     }
 }

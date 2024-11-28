@@ -16,7 +16,7 @@ public class ImageController {
         this.imageView = imageView;
     }
     public void handleZoomIn(){
-        System.out.println("zoom in");
+        System.out.println(imageView.toString() + "zoom in");
         //perspective.zoomIn();
         //manque a update les vues je crois
     }
@@ -32,6 +32,16 @@ public class ImageController {
     }
     public void handleTranslateRight(){
         System.out.println("translate right");
+        //perspective.translateRight();
+        //manque a update les vues je crois
+    }
+    public void handleTranslateUp(){
+        System.out.println("translate up");
+        //perspective.translateRight();
+        //manque a update les vues je crois
+    }
+    public void handleTranslateDown(){
+        System.out.println("translate down");
         //perspective.translateRight();
         //manque a update les vues je crois
     }
