@@ -13,15 +13,16 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         PerspectiveView perspectiveView = new PerspectiveView();
+        PerspectiveView perspectiveView2 = new PerspectiveView();
         ThumbnailView thumbnailView = new ThumbnailView();
 
-        HBox root = new HBox(20, perspectiveView.getView(), thumbnailView); 
+        HBox root = new HBox(20,thumbnailView.getView(),perspectiveView.getView(), perspectiveView2.getView()); 
 
 
         root.setStyle("-fx-alignment: center;");
 
 
-        Scene scene = new Scene(root, 800, 400); 
+        Scene scene = new Scene(root, 600, 400); 
 
         stage.setTitle("Test");
         stage.setScene(scene);

@@ -47,7 +47,10 @@ public class PerspectiveView extends ImageView implements Observer {
     }
 
     public HBox getView() {
-        return new HBox(10, imageView, translateLeft, zoomIn, zoomOut, translateRight);
+
+        HBox hb = new HBox(10, imageView, translateLeft, zoomIn, zoomOut, translateRight);
+        hb.setStyle("-fx-border-color: black; -fx-border-width: 2;");
+        return hb;
     }
 
     @Override

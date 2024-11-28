@@ -1,6 +1,7 @@
 package com.example;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 public class ThumbnailView extends ImageView implements Observer {
     private ImageView imageView;
@@ -16,8 +17,13 @@ public class ThumbnailView extends ImageView implements Observer {
 
         controller = new ImageController(image, imageView);
 
-        // Add a border to the ThumbnailView for visualization
         this.setStyle("-fx-border-color: red; -fx-border-width: 2;");
+    }
+    public HBox getView() {
+
+        HBox hb = new HBox(10, imageView);
+        hb.setStyle("-fx-border-color: red; -fx-border-width: 2;");
+        return hb;
     }
 
     @Override
