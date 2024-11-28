@@ -1,12 +1,10 @@
 package com.example;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-/**
- * 
- * JavaFX App
- */
 public class App extends Application {
     public static void main(String[] args) {
         launch();
@@ -14,13 +12,19 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Perspective perspective = new Perspective();
         PerspectiveView perspectiveView = new PerspectiveView();
-        ImageController imageController = new ImageController(perspective, perspectiveView);
+        ThumbnailView thumbnailView = new ThumbnailView();
+
+        HBox root = new HBox(20, perspectiveView.getView(), thumbnailView); 
+
+
+        root.setStyle("-fx-alignment: center;");
+
+
+        Scene scene = new Scene(root, 800, 400); 
 
         stage.setTitle("Test");
-        stage.setScene(perspectiveView.getScene());
+        stage.setScene(scene);
         stage.show();
     }
-
 }

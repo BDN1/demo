@@ -11,19 +11,23 @@ public class ImageController {
         this.perspective = perspective;
         this.imageView = imageView;
     }
-    private void handleZoomIn(){
+    public ImageController(ImageModel image, ImageView imageView){
+        this.model = image;
+        this.imageView = imageView;
+    }
+    public void handleZoomIn(){
         perspective.zoomIn();
         //manque a update les vues je crois
     }
-    private void handleZoomOut(){
+    public void handleZoomOut(){
         perspective.zoomOut();
         //manque a update les vues je crois
     }
-    private void handleTranslateLeft(){
+    public void handleTranslateLeft(){
         perspective.translateLeft();
         //manque a update les vues je crois
     }
-    private void handleTranslateRight(){
+    public void handleTranslateRight(){
         perspective.translateRight();
         //manque a update les vues je crois
     }
