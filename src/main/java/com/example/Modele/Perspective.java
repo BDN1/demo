@@ -1,5 +1,8 @@
 package com.example.Modele;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.example.Vue.Observer;
 
 public class Perspective {
@@ -7,8 +10,19 @@ public class Perspective {
     private double y=0;
     private double scale = 1.0;
 
-    private Observer[] observers;
+    private List<Observer> observers = new ArrayList<>();
 
+    public void attach(Observer obs){
+        observers.add(obs);
+    }
+    public void detach(Observer obs){
+        observers.remove(obs);
+    }
+    public void notifyObserver(){
+        for(Observer observer : observers){
+            observer.update();
+        }
+    }
     public double getScale(){
         return scale;
     }
@@ -18,15 +32,30 @@ public class Perspective {
     public double getY(){
         return y;
     }
-
-    public void zoom() {
-
+    public void zoomIn() {
+        scale *= 1.1;
+        notifyObserver();
+    }
+    public void zoomOut(){
+        scale *= 0.9;
+        notifyObserver();
+    }
+    public void translateLeft(){
+        x -= 10;
+        notifyObserver();
+    }
+    public void translateRight(){
+        x += 10;
+        notifyObserver();
+    }
+    public void translateUp(){
+        y -= 10;
+        notifyObserver();
+    }
+    public void translateDown(){
+        y += 10;
+        notifyObserver();
     }
     
-    public void translate() {
-
-    }
-
-    //peut être les translates y a faire ?????
 
 }

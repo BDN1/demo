@@ -3,6 +3,6 @@ package com.example.Command;
 //Interface Commande
 
 public interface ICommand {
-    public void execute();
+    public boolean  execute();
     public void undo();
 }

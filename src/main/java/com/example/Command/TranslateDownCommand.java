@@ -2,17 +2,18 @@ package com.example.Command;
 
 import com.example.Modele.Perspective;
 
-//Commande de zoom
+//Commande de translation
 
-public class ZoomCommand implements ICommand {
+public class TranslateDownCommand extends Command implements ICommand {
     private Perspective perspective;
 
-    public ZoomCommand(Perspective perspective){
+    public TranslateDownCommand(Perspective perspective){
         this.perspective = perspective;
     }
 
+    @Override
     public void execute() {
-        this.perspective.zoom();
+        this.perspective.translateDown();
     }
     
     @Override

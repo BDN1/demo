@@ -1,6 +1,8 @@
 package com.example.Controleur;
 
+import com.example.Command.Command;
 import com.example.Command.CommandManager;
+import com.example.Command.ICommand;
 import com.example.Modele.ImageModel;
 import com.example.Modele.Perspective;
 
@@ -21,34 +23,32 @@ public class ImageController {
         this.imageView = imageView;
     }
     public void handleZoomIn(){
-        System.out.println(imageView.toString() + "zoom in");
         //perspective.zoomIn();
         //manque a update les vues je crois
     }
     public void handleZoomOut(){
-        System.out.println("zoom out");
-        //perspective.zoomOut();
+        perspective.zoomOut();
         //manque a update les vues je crois
     }
     public void handleTranslateLeft(){
-        System.out.println("translate left");
-        //perspective.translateLeft();
+        perspective.translateLeft();
         //manque a update les vues je crois
     }
     public void handleTranslateRight(){
-        System.out.println("translate right");
-        //perspective.translateRight();
+        perspective.translateRight();
         //manque a update les vues je crois
     }
     public void handleTranslateUp(){
-        System.out.println("translate up");
-        //perspective.translateRight();
+        perspective.translateRight();
         //manque a update les vues je crois
     }
     public void handleTranslateDown(){
-        System.out.println("translate down");
-        //perspective.translateRight();
+        perspective.translateRight();
         //manque a update les vues je crois
+    }
+
+    private void executeCommand(Command command){
+        if()
     }
 
     
