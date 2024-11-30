@@ -11,10 +11,12 @@ public class TranslateCommand implements ICommand {
         this.perspective = perspective;
     }
 
+    @Override
     public void execute() {
         this.perspective.translate();
     }
     
+    @Override
     public void undo() {
         
     }

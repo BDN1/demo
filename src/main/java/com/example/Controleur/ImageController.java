@@ -1,5 +1,6 @@
 package com.example.Controleur;
 
+import com.example.Command.CommandManager;
 import com.example.Modele.ImageModel;
 import com.example.Modele.Perspective;
 
@@ -9,6 +10,7 @@ public class ImageController {
     private ImageModel model;
     private Perspective perspective;
     private ImageView imageView;
+    private CommandManager commandManager;
 
     public ImageController(Perspective perspective, ImageView imageView){
         this.perspective = perspective;

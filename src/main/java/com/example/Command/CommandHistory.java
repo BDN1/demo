@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class CommandHistory {
 
-    private Stack<ICommand> commandStack = new Stack<>();
+    private final Stack<ICommand> commandStack = new Stack<>();
 
     public void executeCommand(ICommand command) {
         command.execute();
