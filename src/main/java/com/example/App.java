@@ -2,11 +2,11 @@ package com.example;
 
 import java.io.File;
 
+import com.example.Command.CommandManager;
 import com.example.Vue.PerspectiveView;
 import com.example.Vue.ThumbnailView;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -21,12 +21,15 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
+    private CommandManager commandManager = CommandManager.getInstance();
 
     @Override
     public void start(Stage stage) throws Exception {
         PerspectiveView perspectiveView = new PerspectiveView();
         PerspectiveView perspectiveView2 = new PerspectiveView();
         ThumbnailView thumbnailView = new ThumbnailView();
+        
+        
 
         BorderPane root = new BorderPane();
 
@@ -57,7 +60,7 @@ public class App extends Application {
         uploadItem.setOnAction(e -> handleUploadImage(perspectiveView, perspectiveView2, thumbnailView));
 
         MenuItem undo = new MenuItem("Défaire");
-        // undo.setOnAction(e -> undo());
+        undo.setOnAction(e -> commandManager.undoLastCommand());
         MenuItem redo = new MenuItem("Refaire");
         // redo.setOnAction(e -> redo());
 

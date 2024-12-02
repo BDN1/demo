@@ -9,6 +9,7 @@ import com.example.Command.ZoomInCommand;
 import com.example.Command.ZoomOutCommand;
 import com.example.Modele.ImageModel;
 import com.example.Modele.Perspective;
+
 import javafx.scene.image.ImageView;
 
 public class ImageController {
@@ -55,5 +56,10 @@ public class ImageController {
     public void handleTranslateDown(){
         TranslateDownCommand translateDownCommand = new TranslateDownCommand(perspective);
         commandManager.pressTranslate(translateDownCommand);
+    }
+
+
+    public void handleUndo(){
+        commandManager.undoLastCommand();
     }
 }
