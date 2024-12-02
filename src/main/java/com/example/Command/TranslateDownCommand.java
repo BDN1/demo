@@ -2,8 +2,6 @@ package com.example.Command;
 
 import com.example.Modele.Perspective;
 
-//Commande de translation
-
 public class TranslateDownCommand implements ICommand {
     private Perspective perspective;
 
@@ -13,15 +11,11 @@ public class TranslateDownCommand implements ICommand {
 
     @Override
     public void execute() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+        this.perspective.translateDown();
     }
 
     @Override
     public void undo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'undo'");
+        this.perspective.translateUp();
     }
-
-    
 }

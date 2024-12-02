@@ -16,8 +16,6 @@ public class TranslateLeftCommand implements ICommand {
 
     @Override
     public void undo() {
-        
+        this.perspective.translateRight();
     }
-
-    
 }

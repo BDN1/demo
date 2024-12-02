@@ -12,12 +12,10 @@ public class ZoomOutCommand implements ICommand {
     @Override
     public void execute() {
         this.perspective.zoomOut();
-        
     }
     
     @Override
     public void undo() {
-        
+        this.perspective.zoomIn();
     }
-
 }

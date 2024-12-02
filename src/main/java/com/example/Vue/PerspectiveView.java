@@ -1,11 +1,9 @@
 package com.example.Vue;
 
 import java.io.File;
-
 import com.example.Controleur.ImageController;
 import com.example.Modele.ImageModel;
 import com.example.Modele.Perspective;
-
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -53,6 +51,7 @@ public class PerspectiveView extends ImageView implements Observer {
         translateUp.setOnAction(e -> controller.handleTranslateUp());
         translateDown.setOnAction(e -> controller.handleTranslateDown());
     }
+
     public VBox getView() {
         HBox hb = new HBox(10, imageView);
         hb.setAlignment(Pos.CENTER);
@@ -72,10 +71,11 @@ public class PerspectiveView extends ImageView implements Observer {
 
         imageView.setTranslateX(perspective.getX());
     }
+
     public void loadImage(File file) {
         image.loadImage(file);
         if (image.getImage() != null) {
-            imageView.setImage(image.getImage());  // Set the ImageView to display the loaded image
+            imageView.setImage(image.getImage());
         } else {
             System.err.println("Image not loaded correctly.");
         }

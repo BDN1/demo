@@ -5,8 +5,6 @@ import java.util.Stack;
 public class CommandManager {
 
     private static CommandManager instance;
-    private ICommand undoLast;
-    private CommandHistory commandHistory;
 
     private ICommand translate;
     private ICommand zoom;
@@ -14,7 +12,6 @@ public class CommandManager {
     private final Stack<ICommand> commandStack = new Stack<>();
 
     private CommandManager(ICommand translate, ICommand zoom) {
-        commandHistory = new CommandHistory();
         this.translate = translate;
         this.zoom = zoom;
     }
@@ -36,11 +33,6 @@ public class CommandManager {
         commandStack.push(command);
     }
 
-    public void setUndoLast(ICommand command) {
-        undoLast = command;
-        commandStack.push(command);
-    }
-
     public void undoLastCommand() {
         if (!commandStack.isEmpty()) {
             ICommand command = commandStack.pop();
@@ -50,10 +42,4 @@ public class CommandManager {
             System.out.println("pas de command a undo");
         }
     }
-
-   
-
-
-
-
 }

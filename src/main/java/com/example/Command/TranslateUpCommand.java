@@ -1,4 +1,5 @@
 package com.example.Command;
+
 import com.example.Modele.Perspective;
 
 public class TranslateUpCommand implements ICommand{
@@ -11,11 +12,10 @@ public class TranslateUpCommand implements ICommand{
     @Override
     public void  execute() {
         this.perspective.translateUp();
-       
     }
 
     @Override
     public void undo() {
-        
+        this.perspective.translateDown();
     }
 }

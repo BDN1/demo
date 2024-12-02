@@ -12,12 +12,10 @@ public class TranslateRightCommand implements ICommand {
     @Override
     public void execute() {
         this.perspective.translateRight();
-        
     }
 
     @Override
     public void undo() {
-        
+        this.perspective.translateLeft();
     }
-
 }

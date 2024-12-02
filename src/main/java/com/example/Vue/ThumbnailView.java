@@ -1,10 +1,8 @@
 package com.example.Vue;
 
 import java.io.File;
-
 import com.example.Controleur.ImageController;
 import com.example.Modele.ImageModel;
-
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -23,6 +21,7 @@ public class ThumbnailView extends ImageView implements Observer {
 
         controller = new ImageController(image, imageView);
     }
+    
     public HBox getView() {
 
         HBox hb = new HBox(10, imageView);
@@ -36,6 +35,7 @@ public class ThumbnailView extends ImageView implements Observer {
         imageView.setFitWidth(image.getImage().getWidth());
         imageView.setFitHeight(image.getImage().getHeight());
     }
+
     public void loadImage(File file) {
         image.loadImage(file);
         if (image.getImage() != null) {
