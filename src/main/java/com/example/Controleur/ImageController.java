@@ -15,7 +15,7 @@ public class ImageController {
     private ImageModel model;
     private Perspective perspective;
     private ImageView imageView;
-    private CommandManager commandManager;
+    private CommandManager commandManager = CommandManager.getInstance();
 
     public ImageController(Perspective perspective, ImageView imageView) {
         this.perspective = perspective;
@@ -26,8 +26,6 @@ public class ImageController {
         this.model = image;
         this.imageView = imageView;
     }
-    
-    //AJOUTER LES UPDATES
 
     public void handleZoomIn() {
         ZoomInCommand zoomInCommand = new ZoomInCommand(perspective);

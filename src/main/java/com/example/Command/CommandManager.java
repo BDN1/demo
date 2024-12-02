@@ -6,30 +6,22 @@ public class CommandManager {
 
     private static CommandManager instance;
 
-    private ICommand translate;
-    private ICommand zoom;
-
     private final Stack<ICommand> commandStack = new Stack<>();
 
-    private CommandManager(ICommand translate, ICommand zoom) {
-        this.translate = translate;
-        this.zoom = zoom;
-    }
-
-    public static CommandManager getInstance(ICommand translate, ICommand zoom) {
+    public static CommandManager getInstance() {
         if (instance == null) {
-            instance = new CommandManager(translate, zoom); 
+            instance = new CommandManager(); 
         }
         return instance; 
     }
 
     public void pressTranslate(ICommand command) {
-        this.translate.execute();
+        command.execute();
         commandStack.push(command);
     }
 
     public void pressZoom(ICommand command) {
-        this.zoom.execute();
+        command.execute();
         commandStack.push(command);
     }
 

@@ -1,0 +1,196 @@
+@startuml
+
+package com.example {
+    class App {
+        +main(String[] args)
+        +start(Stage stage)
+        -createMenuBar(PerspectiveView, PerspectiveView, ThumbnailView): MenuBar
+        -handleUploadImage(PerspectiveView, PerspectiveView, ThumbnailView)
+    }
+
+    class CommandManager {
+        -static CommandManager instance
+        -Stack<ICommand> commandStack
+        +static getInstance(): CommandManager
+        +pressTranslate(ICommand)
+        +pressZoom(ICommand)
+        +undoLastCommand()
+    }
+
+    interface ICommand {
+        +execute()
+        +undo()
+    }
+
+    class TranslateUpCommand {
+        -Perspective perspective
+        +TranslateUpCommand(Perspective)
+        +execute()
+        +undo()
+    }
+
+    class TranslateDownCommand {
+        -Perspective perspective
+        +TranslateDownCommand(Perspective)
+        +execute()
+        +undo()
+    }
+
+    class TranslateLeftCommand {
+        -Perspective perspective
+        +TranslateLeftCommand(Perspective)
+        +execute()
+        +undo()
+    }
+
+    class TranslateRightCommand {
+        -Perspective perspective
+        +TranslateRightCommand(Perspective)
+        +execute()
+        +undo()
+    }
+
+    class ZoomInCommand {
+        -Perspective perspective
+        +ZoomInCommand(Perspective)
+        +execute()
+        +undo()
+    }
+
+    class ZoomOutCommand {
+        -Perspective perspective
+        +ZoomOutCommand(Perspective)
+        +execute()
+        +undo()
+    }
+
+    class ImageController {
+        -ImageModel model
+        -Perspective perspective
+        -ImageView imageView
+        -CommandManager commandManager
+        +ImageController(Perspective, ImageView)
+        +ImageController(ImageModel, ImageView)
+        +handleZoomIn()
+        +handleZoomOut()
+        +handleTranslateLeft()
+        +handleTranslateRight()
+        +handleTranslateUp()
+        +handleTranslateDown()
+    }
+
+    class ImageModel {
+        -Image image
+        -Observer[] observers
+        +setImage(Image)
+        +getImage(): Image
+        +loadImage(File)
+        +attach(Observer)
+        +detach(Observer)
+        +notifyObservers()
+    }
+
+    class Perspective {
+        -double x
+        -double y
+        -double scale
+        -List<Observer> observers
+        +attach(Observer)
+        +detach(Observer)
+        +notifyObserver()
+        +getScale(): double
+        +getX(): double
+        +getY(): double
+        +zoomIn()
+        +zoomOut()
+        +translateLeft()
+        +translateRight()
+        +translateUp()
+        +translateDown()
+    }
+
+    interface Observer {
+        +update()
+    }
+
+    class PerspectiveView {
+        -ImageView imageView
+        -ImageModel image
+        -Perspective perspective
+        -ImageController controller
+        -Button zoomIn
+        -Button zoomOut
+        -Button translateLeft
+        -Button translateRight
+        -Button translateUp
+        -Button translateDown
+        -double screenHeight
+        -double screenWidth
+        +PerspectiveView()
+        -setButtonActions()
+        +getView(): VBox
+        +update()
+        +loadImage(File)
+    }
+
+    class ThumbnailView {
+        -ImageView imageView
+        -ImageModel image
+        -ImageController controller
+        -double screenHeight
+        -double screenWidth
+        +ThumbnailView()
+        +getView(): HBox
+        +update()
+        +loadImage(File)
+    }
+}
+
+App --> PerspectiveView
+App --> ThumbnailView
+App --> MenuBar
+App --> FileChooser
+
+CommandManager --> ICommand
+
+TranslateUpCommand --> ICommand
+TranslateUpCommand --> Perspective
+
+TranslateDownCommand --> ICommand
+TranslateDownCommand --> Perspective
+
+TranslateLeftCommand --> ICommand
+TranslateLeftCommand --> Perspective
+
+TranslateRightCommand --> ICommand
+TranslateRightCommand --> Perspective
+
+ZoomInCommand --> ICommand
+ZoomInCommand --> Perspective
+
+ZoomOutCommand --> ICommand
+ZoomOutCommand --> Perspective
+
+ImageController --> ImageModel
+ImageController --> Perspective
+ImageController --> ImageView
+ImageController --> ICommand
+
+ImageModel --> Image
+ImageModel --> Observer
+
+Perspective --> Observer
+
+PerspectiveView --> ImageView
+PerspectiveView --> ImageModel
+PerspectiveView --> Perspective
+PerspectiveView --> ImageController
+PerspectiveView --> Button
+PerspectiveView --> Observer
+
+ThumbnailView --> ImageView
+ThumbnailView --> ImageModel
+ThumbnailView --> ImageController
+ThumbnailView --> Observer
+
+@enduml

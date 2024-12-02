@@ -18,17 +18,14 @@ public class ThumbnailView extends ImageView implements Observer {
     private double screenWidth = Screen.getPrimary().getBounds().getWidth();
 
     public ThumbnailView() {
-        System.out.println(screenHeight);
-        System.out.println(screenWidth);
+        System.out.println("Hauteur Ecran: " + screenHeight);
+        System.out.println("Larger Ecran: " + screenWidth);
 
         image = new ImageModel();
         imageView = new ImageView();
         imageView.setFitHeight(screenHeight * 0.9);
         imageView.setFitWidth(screenWidth / 3.1);
         imageView.setPreserveRatio(true);
-
-        // Apply border style directly to the ImageView
-        imageView.setStyle("-fx-border-color: black; -fx-border-width: 5;");
 
         controller = new ImageController(image, imageView);
     }

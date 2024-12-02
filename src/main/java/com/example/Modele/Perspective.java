@@ -38,12 +38,12 @@ public class Perspective {
     }
     
     public void zoomIn() {
-        scale *= 1.1;
+        scale += 0.1;
         notifyObserver();
     }
 
     public void zoomOut() {
-        scale *= 0.9;
+        scale -= 0.1;
         notifyObserver();
     }
     

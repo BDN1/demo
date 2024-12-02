@@ -4,7 +4,6 @@ import java.io.File;
 import com.example.Controleur.ImageController;
 import com.example.Modele.ImageModel;
 import com.example.Modele.Perspective;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -35,9 +34,6 @@ public class PerspectiveView extends ImageView implements Observer {
         imageView.setFitWidth(screenWidth  / 3.1);
         imageView.setPreserveRatio(false);
 
-        // Apply border style directly to the ImageView
-        imageView.setStyle("-fx-border-color: blue; -fx-border-width: 5;");
-
         translateLeft = new Button("<-");
         translateUp = new Button("^");
         zoomIn = new Button("Zoom In");
@@ -46,6 +42,7 @@ public class PerspectiveView extends ImageView implements Observer {
         translateDown = new Button("v");
 
         perspective = new Perspective();
+        perspective.attach(this);
         controller = new ImageController(perspective, imageView);
 
         setButtonActions();
@@ -63,7 +60,6 @@ public class PerspectiveView extends ImageView implements Observer {
     public VBox getView() {
         HBox hb = new HBox(10, imageView);
         hb.setAlignment(Pos.CENTER);
-        //hb.setPadding(new Insets(0, 20, 0, 20)); // Add padding to the HBox
 
         HBox buttonBox = new HBox(10, translateLeft, translateUp, zoomIn, zoomOut, translateRight, translateDown);
         buttonBox.setAlignment(Pos.CENTER);
@@ -75,9 +71,14 @@ public class PerspectiveView extends ImageView implements Observer {
 
     @Override
     public void update() {
+        System.out.println("Updating Image");
+        System.out.println("Scale: " + perspective.getScale());
+        System.out.println("X: " + perspective.getX());
+        System.out.println("Y: " + perspective.getY());
         imageView.setFitWidth(image.getImage().getWidth() * perspective.getScale());
         imageView.setFitHeight(image.getImage().getHeight() * perspective.getScale());
         imageView.setTranslateX(perspective.getX());
+        imageView.setTranslateY(perspective.getY());
     }
 
     public void loadImage(File file) {
