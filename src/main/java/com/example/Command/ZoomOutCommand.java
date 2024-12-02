@@ -10,7 +10,7 @@ public class ZoomOutCommand implements ICommand {
     }
 
     @Override
-    public execute() {
+    public void execute() {
         this.perspective.zoomOut();
         
     }

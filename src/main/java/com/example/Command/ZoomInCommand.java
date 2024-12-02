@@ -19,6 +19,6 @@ public class ZoomInCommand  implements ICommand {
     
     @Override
     public void undo() {
-        
+        this.perspective.zoomOut();
     }
 }

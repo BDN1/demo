@@ -11,7 +11,7 @@ public class TranslateUpCommand implements ICommand{
     @Override
     public void  execute() {
         this.perspective.translateUp();
-        return true;
+       
     }
 
     @Override

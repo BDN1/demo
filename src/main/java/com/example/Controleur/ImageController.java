@@ -2,6 +2,12 @@ package com.example.Controleur;
 
 
 import com.example.Command.CommandManager;
+import com.example.Command.TranslateDownCommand;
+import com.example.Command.TranslateLeftCommand;
+import com.example.Command.TranslateRightCommand;
+import com.example.Command.TranslateUpCommand;
+import com.example.Command.ZoomInCommand;
+import com.example.Command.ZoomOutCommand;
 import com.example.Modele.ImageModel;
 import com.example.Modele.Perspective;
 
@@ -22,28 +28,43 @@ public class ImageController {
         this.imageView = imageView;
     }
     public void handleZoomIn(){
+        ZoomInCommand zoomInCommand = new ZoomInCommand(perspective);
+        commandManager.pressZoom(zoomInCommand);
+        // il manque la methode update je sais pas elles est ou ?
         //perspective.zoomIn();
         //manque a update les vues je crois
     }
     public void handleZoomOut(){
-        perspective.zoomOut();
+        ZoomOutCommand zoomOutCommand = new ZoomOutCommand(perspective);
+        // faut creer un presse zoomout ici 
         //manque a update les vues je crois
+        // il manque la methode update je sais pas elles est ou ?
     }
     public void handleTranslateLeft(){
-        perspective.translateLeft();
+        TranslateLeftCommand TranslateLeftCommand = new TranslateLeftCommand(perspective);
+        commandManager.pressTranslate(TranslateLeftCommand);
         //manque a update les vues je crois
+        // il manque la methode update je sais pas elles est ou ?
     }
     public void handleTranslateRight(){
-        perspective.translateRight();
+        TranslateRightCommand translateRightCommand = new TranslateRightCommand(perspective);
+        commandManager.pressTranslate(translateRightCommand);
+        
+        
         //manque a update les vues je crois
+        // il manque la methode update je sais pas elles est ou ?
     }
     public void handleTranslateUp(){
-        perspective.translateRight();
+        TranslateUpCommand translateUpCommand = new TranslateUpCommand(perspective);
+        commandManager.pressTranslate(translateUpCommand);
         //manque a update les vues je crois
+        // il manque la methode update je sais pas elles est ou ?
     }
     public void handleTranslateDown(){
-        perspective.translateRight();
+        TranslateDownCommand translateDownCommand = new TranslateDownCommand(perspective);
+        commandManager.pressTranslate(translateDownCommand);
         //manque a update les vues je crois
+        // il manque la methode update je sais pas elles est ou ?
     }
 
     
