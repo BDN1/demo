@@ -62,4 +62,8 @@ public class ImageController {
     public void handleUndo(){
         commandManager.undoLastCommand();
     }
+
+    public void handleRedo() {
+        commandManager.redoLastCommand(); 
+    }
 }

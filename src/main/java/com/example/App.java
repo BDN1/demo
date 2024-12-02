@@ -62,6 +62,7 @@ public class App extends Application {
         MenuItem undo = new MenuItem("Défaire");
         undo.setOnAction(e -> commandManager.undoLastCommand());
         MenuItem redo = new MenuItem("Refaire");
+        redo.setOnAction(e -> commandManager.redoLastCommand());
         // redo.setOnAction(e -> redo());
 
         // Add the "Upload" item to the "File" menu
