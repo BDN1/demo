@@ -6,6 +6,7 @@ import com.example.Vue.PerspectiveView;
 import com.example.Vue.ThumbnailView;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -13,6 +14,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -25,24 +27,28 @@ public class App extends Application {
         PerspectiveView perspectiveView = new PerspectiveView();
         PerspectiveView perspectiveView2 = new PerspectiveView();
         ThumbnailView thumbnailView = new ThumbnailView();
-        
+
         BorderPane root = new BorderPane();
 
-        root.setCenter(new HBox(20,thumbnailView.getView(),perspectiveView.getView(), perspectiveView2.getView()));
-        MenuBar menuBar = createMenuBar(perspectiveView, perspectiveView2, thumbnailView);
+        HBox centerBox = new HBox(20, thumbnailView.getView(), perspectiveView.getView(), perspectiveView2.getView());
+        root.setCenter(centerBox);
 
+        MenuBar menuBar = createMenuBar(perspectiveView, perspectiveView2, thumbnailView);
         root.setTop(menuBar);
 
         root.setStyle("-fx-alignment: center;");
 
-
-        Scene scene = new Scene(root, 600, 400); 
+        Scene scene = new Scene(root, Screen.getPrimary().getBounds().getWidth() * 0.9,
+                Screen.getPrimary().getBounds().getHeight() * 0.9);
 
         stage.setTitle("Test");
         stage.setScene(scene);
+        stage.setFullScreen(true);
         stage.show();
     }
-    private MenuBar createMenuBar(PerspectiveView perspectiveView, PerspectiveView perspectiveView2, ThumbnailView thumbnailView){
+
+    private MenuBar createMenuBar(PerspectiveView perspectiveView, PerspectiveView perspectiveView2,
+            ThumbnailView thumbnailView) {
         Menu fileMenu = new Menu("Fichier");
         Menu edition = new Menu("Édition");
 
@@ -51,11 +57,9 @@ public class App extends Application {
         uploadItem.setOnAction(e -> handleUploadImage(perspectiveView, perspectiveView2, thumbnailView));
 
         MenuItem undo = new MenuItem("Défaire");
-        //undo.setOnAction(e -> undo());
+        // undo.setOnAction(e -> undo());
         MenuItem redo = new MenuItem("Refaire");
-        //redo.setOnAction(e -> redo());
-
-
+        // redo.setOnAction(e -> redo());
 
         // Add the "Upload" item to the "File" menu
         fileMenu.getItems().add(uploadItem);
@@ -69,10 +73,13 @@ public class App extends Application {
 
         return menuBar;
     }
-    private void handleUploadImage(PerspectiveView perspectiveView, PerspectiveView perspectiveView2, ThumbnailView thumbnailView) {
+
+    private void handleUploadImage(PerspectiveView perspectiveView, PerspectiveView perspectiveView2,
+            ThumbnailView thumbnailView) {
         // Open the FileChooser to select an image file
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.gif"));
+        fileChooser.getExtensionFilters()
+                .add(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.gif"));
 
         // Show the open file dialog
         File selectedFile = fileChooser.showOpenDialog(null);

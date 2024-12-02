@@ -27,6 +27,8 @@ public class ImageController {
         this.imageView = imageView;
     }
     
+    //AJOUTER LES UPDATES
+
     public void handleZoomIn() {
         ZoomInCommand zoomInCommand = new ZoomInCommand(perspective);
         commandManager.pressZoom(zoomInCommand);
