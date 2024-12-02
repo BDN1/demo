@@ -1,7 +1,7 @@
 package com.example.Command;
 import com.example.Modele.Perspective;
 
-public class TranslateUpCommand extends Command implements ICommand{
+public class TranslateUpCommand implements ICommand{
     private Perspective perspective;
 
     public TranslateUpCommand(Perspective perspective){
@@ -9,7 +9,7 @@ public class TranslateUpCommand extends Command implements ICommand{
     }
 
     @Override
-    public boolean  execute() {
+    public void  execute() {
         this.perspective.translateUp();
         return true;
     }

@@ -4,7 +4,7 @@ import com.example.Modele.Perspective;
 
 //Commande de zoom
 
-public class ZoomInCommand extends Command implements ICommand {
+public class ZoomInCommand  implements ICommand {
     private Perspective perspective;
 
     public ZoomInCommand(Perspective perspective){
@@ -12,9 +12,9 @@ public class ZoomInCommand extends Command implements ICommand {
     }
 
     @Override
-    public boolean  execute() {
+    public void execute() {
         this.perspective.zoomIn();
-        return true;
+        
     }
     
     @Override

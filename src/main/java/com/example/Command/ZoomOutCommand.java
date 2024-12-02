@@ -2,7 +2,7 @@ package com.example.Command;
 
 import com.example.Modele.Perspective;
 
-public class ZoomOutCommand extends Command implements ICommand {
+public class ZoomOutCommand implements ICommand {
     private Perspective perspective;
 
     public ZoomOutCommand(Perspective perspective){
@@ -10,9 +10,9 @@ public class ZoomOutCommand extends Command implements ICommand {
     }
 
     @Override
-    public boolean  execute() {
+    public execute() {
         this.perspective.zoomOut();
-        return true;
+        
     }
     
     @Override

@@ -15,6 +15,13 @@ public class CommandManager {
         this.zoom = zoom;
     }
 
+    public static CommandManager getInstance(ICommand translate, ICommand zoom) {
+        if (instance == null) {
+            instance = new CommandManager(translate, zoom); 
+        }
+        return instance; 
+    }
+
     public void pressTranslate() {
         this.translate.execute();
     }
@@ -30,5 +37,8 @@ public class CommandManager {
     public ICommand getLastUndoneCommand() {
         return undoLast;
     }
+
+
+
 
 }

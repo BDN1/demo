@@ -1,8 +1,7 @@
 package com.example.Controleur;
 
-import com.example.Command.Command;
+
 import com.example.Command.CommandManager;
-import com.example.Command.ICommand;
 import com.example.Modele.ImageModel;
 import com.example.Modele.Perspective;
 
@@ -47,10 +46,7 @@ public class ImageController {
         //manque a update les vues je crois
     }
 
-    private void executeCommand(Command command){
-        if()
-    }
-
+    
     
 }
 

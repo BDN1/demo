@@ -4,7 +4,7 @@ import com.example.Modele.Perspective;
 
 //Commande de translation
 
-public class TranslateDownCommand extends Command implements ICommand {
+public class TranslateDownCommand implements ICommand {
     private Perspective perspective;
 
     public TranslateDownCommand(Perspective perspective){
@@ -13,11 +13,15 @@ public class TranslateDownCommand extends Command implements ICommand {
 
     @Override
     public void execute() {
-        this.perspective.translateDown();
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'execute'");
     }
-    
+
     @Override
     public void undo() {
-        
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'undo'");
     }
+
+    
 }
