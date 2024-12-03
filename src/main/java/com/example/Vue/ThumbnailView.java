@@ -1,9 +1,10 @@
 package com.example.Vue;
 
 import java.io.File;
+
 import com.example.Controleur.ImageController;
 import com.example.Modele.ImageModel;
-import javafx.geometry.Insets;
+
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -32,6 +33,7 @@ public class ThumbnailView extends ImageView implements Observer {
 
     public HBox getView() {
         HBox hb = new HBox(10, imageView);
+        hb.setStyle("-fx-border-color: grey; -fx-border-width: 5;");
         hb.setAlignment(Pos.CENTER);
         return hb;
     }

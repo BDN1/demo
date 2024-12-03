@@ -2,6 +2,7 @@ package com.example.Modele;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.example.Vue.Observer;
 
 public class Perspective {
@@ -58,6 +59,9 @@ public class Perspective {
     }
 
     public void translateUp() {
+        if(this.y <=0){
+            return;
+        }
         y -= 10;
         notifyObserver();
     }
@@ -66,4 +70,5 @@ public class Perspective {
         y += 10;
         notifyObserver();
     }
+
 }

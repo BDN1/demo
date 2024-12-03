@@ -1,12 +1,11 @@
 package com.example.Modele;
 
 import java.io.File;
-import com.example.Vue.Observer;
+
 import javafx.scene.image.Image;
 
 public class ImageModel {
     private Image image;
-    private Observer[] observers;
 
     public void setImage(Image image){
         this.image = image;

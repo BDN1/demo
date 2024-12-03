@@ -1,14 +1,18 @@
 package com.example.Vue;
 
 import java.io.File;
+
 import com.example.Controleur.ImageController;
 import com.example.Modele.ImageModel;
 import com.example.Modele.Perspective;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 
 public class PerspectiveView extends ImageView implements Observer {
@@ -24,15 +28,22 @@ public class PerspectiveView extends ImageView implements Observer {
     private Button translateUp;
     private Button translateDown;
 
+    Pane container;
+
     double screenHeight = Screen.getPrimary().getBounds().getHeight();
     double screenWidth = Screen.getPrimary().getBounds().getWidth();
 
     public PerspectiveView() {
+
+        container = new Pane();
+
         image = new ImageModel();
         imageView = new ImageView();
-        imageView.setFitHeight(screenHeight * 0.9);
-        imageView.setFitWidth(screenWidth  / 3.1);
-        imageView.setPreserveRatio(false);
+        imageView.setFitHeight(container.getPrefHeight());
+        imageView.setFitWidth(container.getPrefWidth());
+        imageView.setPreserveRatio(true);
+
+        
 
         translateLeft = new Button("<-");
         translateUp = new Button("^");
@@ -58,13 +69,17 @@ public class PerspectiveView extends ImageView implements Observer {
     }
 
     public VBox getView() {
-        HBox hb = new HBox(10, imageView);
-        hb.setAlignment(Pos.CENTER);
+        container.setPrefSize(screenWidth / 3.1, screenHeight * 0.9);
+        container.getChildren().add(imageView);
+
+        Rectangle clip = new Rectangle(container.getPrefWidth() -5,container.getPrefHeight());
+        container.setClip(clip);
 
         HBox buttonBox = new HBox(10, translateLeft, translateUp, zoomIn, zoomOut, translateRight, translateDown);
         buttonBox.setAlignment(Pos.CENTER);
 
-        VBox vb = new VBox(10, hb, buttonBox);
+        VBox vb = new VBox(10,container, buttonBox);
+        vb.setStyle("-fx-border-color: blue; -fx-border-width: 5;");
         vb.setAlignment(Pos.CENTER);
         return vb;
     }
@@ -80,7 +95,10 @@ public class PerspectiveView extends ImageView implements Observer {
         imageView.setTranslateX(perspective.getX());
         imageView.setTranslateY(perspective.getY());
     }
-
+    public void saveImage(String imagePath, String newPath){
+        controller.handleSave(imagePath,newPath);
+    }
+      
     public void loadImage(File file) {
         image.loadImage(file);
         if (image.getImage() != null) {

@@ -48,4 +48,10 @@ public class CommandManager {
             System.out.println("Aucune commande a redo");
         }
     }
+    public void pressSave(ICommand command){
+        command.execute();
+    }
+    public void pressLoad(ICommand command){
+        command.execute();
+    }
 }

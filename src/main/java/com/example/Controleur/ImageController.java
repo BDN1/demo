@@ -1,6 +1,7 @@
 package com.example.Controleur;
 
 import com.example.Command.CommandManager;
+import com.example.Command.SaveImageCommand;
 import com.example.Command.TranslateDownCommand;
 import com.example.Command.TranslateLeftCommand;
 import com.example.Command.TranslateRightCommand;
@@ -65,5 +66,10 @@ public class ImageController {
 
     public void handleRedo() {
         commandManager.redoLastCommand(); 
+    }
+
+    public void handleSave(String imagePath,String newPath){
+        SaveImageCommand saveImageCommand = new SaveImageCommand(perspective,newPath,model,imagePath);
+        commandManager.pressSave(saveImageCommand);
     }
 }

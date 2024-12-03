@@ -22,14 +22,15 @@ public class App extends Application {
         launch();
     }
     private CommandManager commandManager = CommandManager.getInstance();
+    String filePath;
+    Stage stage;
 
     @Override
     public void start(Stage stage) throws Exception {
+        this.stage = stage;
         PerspectiveView perspectiveView = new PerspectiveView();
         PerspectiveView perspectiveView2 = new PerspectiveView();
         ThumbnailView thumbnailView = new ThumbnailView();
-        
-        
 
         BorderPane root = new BorderPane();
 
@@ -55,29 +56,41 @@ public class App extends Application {
         Menu fileMenu = new Menu("Fichier");
         Menu edition = new Menu("Édition");
 
-        // Create the "Upload" menu item
         MenuItem uploadItem = new MenuItem("Charger image");
         uploadItem.setOnAction(e -> handleUploadImage(perspectiveView, perspectiveView2, thumbnailView));
+
+        Menu saveItem = new Menu("Sauvegarder");
+        MenuItem savePerspective1 = new MenuItem("Perspective 1");
+        savePerspective1.setOnAction(e -> handleSave(stage, perspectiveView));
+
+        MenuItem savePerspective2 = new MenuItem("Perspective 2");
+        savePerspective2.setOnAction(e -> handleSave(stage, perspectiveView2) );
 
         MenuItem undo = new MenuItem("Défaire");
         undo.setOnAction(e -> commandManager.undoLastCommand());
         MenuItem redo = new MenuItem("Refaire");
         redo.setOnAction(e -> commandManager.redoLastCommand());
-        // redo.setOnAction(e -> redo());
 
-        // Add the "Upload" item to the "File" menu
-        fileMenu.getItems().add(uploadItem);
-        edition.getItems().add(undo);
-        edition.getItems().add(redo);
+        saveItem.getItems().addAll(savePerspective1,savePerspective2);
 
-        // Create the menu bar and add the "File" menu
+        fileMenu.getItems().addAll(uploadItem,saveItem);
+        edition.getItems().addAll(undo,redo);
+
         MenuBar menuBar = new MenuBar();
-        menuBar.getMenus().add(fileMenu);
-        menuBar.getMenus().add(edition);
+        menuBar.getMenus().addAll(fileMenu,edition);
 
         return menuBar;
     }
 
+    
+    private void handleSave(Stage stage,PerspectiveView perspectiveView){
+        FileChooser chooser = new FileChooser();
+        chooser.getExtensionFilters()
+                .add(new FileChooser.ExtensionFilter("Image files","*.png"));
+
+        File savedFile = chooser.showSaveDialog(stage);
+        perspectiveView.saveImage(filePath,savedFile.getAbsolutePath());
+    }
     private void handleUploadImage(PerspectiveView perspectiveView, PerspectiveView perspectiveView2,
             ThumbnailView thumbnailView) {
         // Open the FileChooser to select an image file
@@ -85,8 +98,8 @@ public class App extends Application {
         fileChooser.getExtensionFilters()
                 .add(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.gif"));
 
-        // Show the open file dialog
         File selectedFile = fileChooser.showOpenDialog(null);
+        filePath = selectedFile.getAbsolutePath();
 
         if (selectedFile != null) {
             // Load the image into both the PerspectiveViews and ThumbnailView
