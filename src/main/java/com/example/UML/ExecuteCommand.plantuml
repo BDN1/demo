@@ -1,0 +1,17 @@
+@startuml ExecuteCommand
+
+actor User
+
+participant ImageController
+participant CommandManager
+participant ZoomInCommand
+participant Perspective
+
+User -> ImageController : handleZoomIn()
+ImageController -> CommandManager : pressZoom(zoomInCommand)
+CommandManager -> ZoomInCommand : execute()
+ZoomInCommand -> Perspective : zoomIn()
+Perspective -> Perspective : notifyObserver()
+Perspective -> ImageController : update()
+
+@enduml

@@ -1,4 +1,5 @@
-@startuml
+@startuml ClassDiagram
+top to bottom direction
 
 package com.example {
     class App {
@@ -6,15 +7,20 @@ package com.example {
         +start(Stage stage)
         -createMenuBar(PerspectiveView, PerspectiveView, ThumbnailView): MenuBar
         -handleUploadImage(PerspectiveView, PerspectiveView, ThumbnailView)
+        -handleSave(Stage, PerspectiveView)
     }
 
     class CommandManager {
         -static CommandManager instance
         -Stack<ICommand> commandStack
+        -Stack<ICommand> redoStack
         +static getInstance(): CommandManager
         +pressTranslate(ICommand)
         +pressZoom(ICommand)
+        +pressSave(ICommand)
+        +pressLoad(ICommand)
         +undoLastCommand()
+        +redoLastCommand()
     }
 
     interface ICommand {
@@ -64,6 +70,16 @@ package com.example {
         +undo()
     }
 
+    class SaveImageCommand {
+        -Perspective perspective
+        -ImageModel imageModel
+        -String imagePath
+        -String newPath
+        +SaveImageCommand(Perspective, String, ImageModel, String)
+        +execute()
+        +undo()
+    }
+
     class ImageController {
         -ImageModel model
         -Perspective perspective
@@ -77,17 +93,16 @@ package com.example {
         +handleTranslateRight()
         +handleTranslateUp()
         +handleTranslateDown()
+        +handleUndo()
+        +handleRedo()
+        +handleSave(String, String)
     }
 
     class ImageModel {
         -Image image
-        -Observer[] observers
         +setImage(Image)
         +getImage(): Image
         +loadImage(File)
-        +attach(Observer)
-        +detach(Observer)
-        +notifyObservers()
     }
 
     class Perspective {
@@ -124,6 +139,7 @@ package com.example {
         -Button translateRight
         -Button translateUp
         -Button translateDown
+        -Pane container
         -double screenHeight
         -double screenWidth
         +PerspectiveView()
@@ -131,6 +147,7 @@ package com.example {
         +getView(): VBox
         +update()
         +loadImage(File)
+        +saveImage(String, String)
     }
 
     class ThumbnailView {
@@ -148,8 +165,6 @@ package com.example {
 
 App --> PerspectiveView
 App --> ThumbnailView
-App --> MenuBar
-App --> FileChooser
 
 CommandManager --> ICommand
 
@@ -171,24 +186,22 @@ ZoomInCommand --> Perspective
 ZoomOutCommand --> ICommand
 ZoomOutCommand --> Perspective
 
+SaveImageCommand --> ICommand
+SaveImageCommand --> Perspective
+SaveImageCommand --> ImageModel
+
 ImageController --> ImageModel
 ImageController --> Perspective
-ImageController --> ImageView
+ImageController --> CommandManager
 ImageController --> ICommand
-
-ImageModel --> Image
-ImageModel --> Observer
 
 Perspective --> Observer
 
-PerspectiveView --> ImageView
 PerspectiveView --> ImageModel
 PerspectiveView --> Perspective
 PerspectiveView --> ImageController
-PerspectiveView --> Button
 PerspectiveView --> Observer
 
-ThumbnailView --> ImageView
 ThumbnailView --> ImageModel
 ThumbnailView --> ImageController
 ThumbnailView --> Observer

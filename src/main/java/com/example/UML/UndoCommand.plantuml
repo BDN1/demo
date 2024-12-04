@@ -1,0 +1,17 @@
+@startuml UndoCommand
+
+actor User
+
+participant ImageController
+participant CommandManager
+participant ZoomInCommand
+participant Perspective
+
+User -> ImageController : handleUndo()
+ImageController -> CommandManager : undoLastCommand()
+CommandManager -> ZoomInCommand : undo()
+ZoomInCommand -> Perspective : zoomOut()
+Perspective -> Perspective : notifyObserver()
+Perspective -> ImageController : update()
+
+@enduml
